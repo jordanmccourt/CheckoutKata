@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CheckoutKata.Tests
@@ -10,7 +11,7 @@ namespace CheckoutKata.Tests
         Product productB = new Product("B", 15);
         Product productC = new Product("C", 40);
         Product productD = new Product("D", 55);
-
+        
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void AddProduct_ProductNull()

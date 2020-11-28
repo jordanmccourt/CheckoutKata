@@ -11,7 +11,7 @@ namespace CheckoutKata
     /// </summary>
     public class FixedAmountPromotion : IPromotion
     {
-        public FixedAmountPromotion(string itemSKU, int numberOfItemsRequired, int finalCost)
+        public FixedAmountPromotion(string itemSKU, int numberOfItemsRequired, int discountAmount)
         {
             if (string.IsNullOrEmpty(itemSKU))
             {
@@ -23,14 +23,14 @@ namespace CheckoutKata
                 throw new ArgumentException(nameof(numberOfItemsRequired));
             }
 
-            if (finalCost <= 0)
+            if (discountAmount <= 0)
             {
-                throw new ArgumentException(nameof(finalCost));
+                throw new ArgumentException(nameof(discountAmount));
             }
 
             this.ItemSKU = itemSKU;
             this.NumberOfItemsRequired = numberOfItemsRequired;
-            this.FinalCost = finalCost;
+            this.DiscountAmount = discountAmount;
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace CheckoutKata
         /// <summary>
         /// Gets or sets the total cost if the <see cref="NumberOfItemsRequired"/> for the promotion is met.
         /// </summary>
-        public int FinalCost { get; set; }
+        public int DiscountAmount { get; set; }
 
-        public int ApplyPromotion(List<IProduct> products)
+        public int GetDiscountAmount(List<IProduct> products)
         {
             if (products == null)
             {
@@ -56,9 +56,10 @@ namespace CheckoutKata
             }
 
             List<IProduct> applicableProducts = products.Where(x => x.ItemSKU == this.ItemSKU).ToList();
+
             int numberOfAppliedPromotions = Math.DivRem(applicableProducts.Count, this.NumberOfItemsRequired, out int remainder);
 
-            return numberOfAppliedPromotions * this.FinalCost;
+            return numberOfAppliedPromotions * this.DiscountAmount;
         }
     }
 }
