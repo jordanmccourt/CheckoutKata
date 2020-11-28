@@ -8,12 +8,18 @@ namespace CheckoutKata
 {
     public class Basket : IBasket
     {
-        public Basket()
+        public Basket() : this(new List<IPromotion>())
+        {            
+        }
+
+        public Basket(List<IPromotion> promotions)
         {
             this.Products = new List<IProduct>();
+            this.Promotions = promotions;
         }
 
         public List<IProduct> Products { get; set; }
+        public List<IPromotion> Promotions { get; set; }
 
         public void AddProductToBasket(IProduct product, int numberToAdd)
         {
@@ -35,7 +41,10 @@ namespace CheckoutKata
 
         public int CalculateTotalPrice()
         {
-            return this.Products.Sum(x => x.UnitPrice);
+            int totalDiscount = 0;
+            this.Promotions.ForEach(x => totalDiscount += x.GetDiscountAmount(this.Products));
+                
+            return this.Products.Sum(x => x.UnitPrice) - totalDiscount;
         }
     }
 }
