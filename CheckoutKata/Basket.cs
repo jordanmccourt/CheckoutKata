@@ -24,5 +24,10 @@ namespace CheckoutKata
 
             this.Products.Add(product);
         }
+
+        public int CalculateTotalPrice()
+        {
+            return this.Products.Sum(x => x.UnitPrice);
+        }
     }
 }

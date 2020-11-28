@@ -8,5 +8,7 @@ namespace CheckoutKata
 {
     public interface IProduct
     {
+        public string ItemSKU { get; set; }
+        public int UnitPrice { get; set; }
     }
 }

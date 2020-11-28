@@ -11,5 +11,6 @@ namespace CheckoutKata
         public List<IProduct> Products { get; set; }
 
         public void AddProductToBasket(IProduct product);
+        public int CalculateTotalPrice();
     }
 }

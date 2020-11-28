@@ -8,5 +8,17 @@ namespace CheckoutKata
 {
     public class Product : IProduct
     {
+        public Product()
+        {
+        }
+
+        public Product(string itemSKU, int unitPrice)
+        {
+            this.ItemSKU = itemSKU;
+            this.UnitPrice = unitPrice;
+        }
+
+        public string ItemSKU { get; set; }
+        public int UnitPrice { get; set; }
     }
 }
