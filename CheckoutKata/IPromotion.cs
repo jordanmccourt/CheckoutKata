@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CheckoutKata
 {
-    public class Class1
+    public interface IPromotion
     {
     }
 }
