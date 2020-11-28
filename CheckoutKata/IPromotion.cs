@@ -8,5 +8,6 @@ namespace CheckoutKata
 {
     public interface IPromotion
     {
+        public int ApplyPromotion(List<IProduct> products);
     }
 }

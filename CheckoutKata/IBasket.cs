@@ -10,7 +10,7 @@ namespace CheckoutKata
     {
         public List<IProduct> Products { get; set; }
 
-        public void AddProductToBasket(IProduct product);
+        public void AddProductToBasket(IProduct product, int numberToAdd);
         public int CalculateTotalPrice();
     }
 }

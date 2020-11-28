@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CheckoutKata.Tests
 {
     [TestClass]
-    public class BasketTest
+    public class BasketTests
     {
         Product productA = new Product("A", 10);
         Product productB = new Product("B", 15);
@@ -13,19 +13,36 @@ namespace CheckoutKata.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void AddNullProduct()
+        public void AddProduct_ProductNull()
         {
             Basket basket = new Basket();
-            basket.AddProductToBasket(null);
+            basket.AddProductToBasket(null, 1);
         }
-        
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void AddProduct_NumberToAddNotPositive()
+        {
+            Basket basket = new Basket();
+            basket.AddProductToBasket(productA, 0);
+        }
+
         [TestMethod]
         public void AddProduct()
         {
             Basket basket = new Basket();
-            basket.AddProductToBasket(productA);
+            basket.AddProductToBasket(productA, 1);
 
             Assert.IsTrue(basket.Products.Contains(productA));
+        }
+
+        [TestMethod]
+        public void AddProduct_MultipleAdd()
+        {
+            Basket basket = new Basket();
+            basket.AddProductToBasket(productA, 2);
+
+            Assert.IsTrue(basket.Products.Contains(productA) && basket.Products.Count == 2);
         }
 
         [TestMethod]
@@ -34,32 +51,32 @@ namespace CheckoutKata.Tests
             Basket basket = new Basket();
             int totalPrice = basket.CalculateTotalPrice();
 
-            Assert.AreEqual(totalPrice, 0);
+            Assert.AreEqual(0, totalPrice);
         }
 
         [TestMethod]
         public void CalculateBasketTotal_OneItem()
         {
             Basket basket = new Basket();
-            basket.AddProductToBasket(productA);
+            basket.AddProductToBasket(productA, 1);
 
             int totalPrice = basket.CalculateTotalPrice();
 
-            Assert.AreEqual(totalPrice, 10);
+            Assert.AreEqual(10, totalPrice);
         }
 
         [TestMethod]
         public void CalculateBasketTotal_MultipleItems()
         {
             Basket basket = new Basket();
-            basket.AddProductToBasket(productA);
-            basket.AddProductToBasket(productB);
-            basket.AddProductToBasket(productC);
-            basket.AddProductToBasket(productD);
+            basket.AddProductToBasket(productA, 1);
+            basket.AddProductToBasket(productB, 1);
+            basket.AddProductToBasket(productC, 1);
+            basket.AddProductToBasket(productD, 1);
 
             int totalPrice = basket.CalculateTotalPrice();
 
-            Assert.AreEqual(totalPrice, 120);
+            Assert.AreEqual(120, totalPrice);
         }
     }
 }

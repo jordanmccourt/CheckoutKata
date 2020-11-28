@@ -47,6 +47,7 @@
     <Compile Include="IBasket.cs" />
     <Compile Include="IPromotion.cs" />
     <Compile Include="IProduct.cs" />
+    <Compile Include="FixedAmountPromotion.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

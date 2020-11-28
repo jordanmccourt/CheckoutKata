@@ -15,14 +15,22 @@ namespace CheckoutKata
 
         public List<IProduct> Products { get; set; }
 
-        public void AddProductToBasket(IProduct product)
+        public void AddProductToBasket(IProduct product, int numberToAdd)
         {
             if (product == null)
             {
                 throw new ArgumentNullException(nameof(product));
             }
+                        
+            if (numberToAdd <= 0)
+            {
+                throw new ArgumentException(nameof(numberToAdd));
+            }
 
-            this.Products.Add(product);
+            foreach (var i in Enumerable.Range(0, numberToAdd))
+            {
+                this.Products.Add(product);
+            }
         }
 
         public int CalculateTotalPrice()
